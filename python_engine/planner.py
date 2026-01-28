@@ -34,6 +34,17 @@ def generate_daily_plan(topics, available_hours):
     return plan
 
 
+def update_learning_decay(topics, studied_topics):
+    """
+    Update last_studied_days for each topic based on today's study.
+    """
+    for topic in topics:
+        if topic["name"] in studied_topics:
+            topic["last_studied_days"] = 0
+        else:
+            topic["last_studied_days"] += 1
+
+
 if __name__ == "__main__":
     sample_topics = [
         {
@@ -61,3 +72,9 @@ if __name__ == "__main__":
 
     plan = generate_daily_plan(sample_topics, available_hours=2)
     print("Today's Plan:", plan)
+
+    update_learning_decay(sample_topics, plan)
+
+    print("\nAfter decay update:")
+    for t in sample_topics:
+        print(t["name"], "last studied days:", t["last_studied_days"])
