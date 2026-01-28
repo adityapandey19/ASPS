@@ -44,37 +44,50 @@ def update_learning_decay(topics, studied_topics):
         else:
             topic["last_studied_days"] += 1
 
+def run_engine(input_data):
+    """
+    Entry point for external callers (API, tests, etc.)
+    """
+    topics = input_data["topics"]
+    hours = input_data["available_hours"]
+
+    plan = generate_daily_plan(topics, hours)
+    update_learning_decay(topics, plan)
+
+    return {
+        "plan": plan,
+        "updated_topics": topics
+    }
+
 
 if __name__ == "__main__":
-    sample_topics = [
-        {
-            "name": "Arrays",
-            "weightage": 0.3,
-            "difficulty": 2,
-            "last_studied_days": 5,
-            "recent_score": 60
-        },
-        {
-            "name": "Linked Lists",
-            "weightage": 0.2,
-            "difficulty": 3,
-            "last_studied_days": 10,
-            "recent_score": 40
-        },
-        {
-            "name": "Stacks",
-            "weightage": 0.1,
-            "difficulty": 1,
-            "last_studied_days": 2,
-            "recent_score": 80
-        }
-    ]
+    sample_input = {
+        "available_hours": 2,
+        "topics": [
+            {
+                "name": "Arrays",
+                "weightage": 0.3,
+                "difficulty": 2,
+                "last_studied_days": 5,
+                "recent_score": 60
+            },
+            {
+                "name": "Linked Lists",
+                "weightage": 0.2,
+                "difficulty": 3,
+                "last_studied_days": 10,
+                "recent_score": 40
+            },
+            {
+                "name": "Stacks",
+                "weightage": 0.1,
+                "difficulty": 1,
+                "last_studied_days": 2,
+                "recent_score": 80
+            }
+        ]
+    }
 
-    plan = generate_daily_plan(sample_topics, available_hours=2)
-    print("Today's Plan:", plan)
+    output = run_engine(sample_input)
+    print(output)
 
-    update_learning_decay(sample_topics, plan)
-
-    print("\nAfter decay update:")
-    for t in sample_topics:
-        print(t["name"], "last studied days:", t["last_studied_days"])
