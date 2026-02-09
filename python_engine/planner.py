@@ -1,13 +1,42 @@
 def compute_priority(topic):
     """
     Compute priority score for a study topic.
+
+    Required keys in topic:
+    - credits (float)              # syllabus weightage
+    - complexity (float)           # base difficulty (1–5)
+    - last_revised_days (int)      # days since last revision
+    - exposure_level (int)         # 0–4
+
+    Optional keys:
+    - test_score (0–100)           # mock / PYQ score
+    - predicted_difficulty (float)# from ML model
     """
-    return (
-        0.4 * topic["weightage"]
-        + 0.3 * topic["difficulty"]
-        + 0.2 * topic["last_studied_days"]
-        - 0.1 * (topic["recent_score"] / 100)
+
+    # 1. Base complexity (ML can override this later)
+    difficulty = topic.get(
+        "predicted_difficulty",
+        topic["complexity"]
     )
+
+    # 2. Exposure penalty (normalized)
+    exposure_penalty = topic["exposure_level"] / 4  # 0 → 1
+
+    # 3. Optional test score penalty
+    score_penalty = 0
+    if "test_score" in topic:
+        score_penalty = topic["test_score"] / 100  # 0 → 1
+
+    # 4. Final priority score
+    priority = (
+        0.4 * topic["credits"]
+        + 0.3 * difficulty
+        + 0.2 * topic["last_revised_days"]
+        - 0.15 * exposure_penalty
+        - 0.15 * score_penalty
+    )
+
+    return priority
 
 
 def generate_daily_plan(topics, available_hours):
@@ -18,7 +47,7 @@ def generate_daily_plan(topics, available_hours):
 
     for topic in topics:
         score = compute_priority(topic)
-        scored_topics.append((score, topic["name"]))
+        scored_topics.append((score, topic["Name"]))
 
     scored_topics.sort(reverse=True)
 
