@@ -1,0 +1,14 @@
+Unit 1
+Arrays
+Array operations
+2D arrays
+
+Unit 2
+Linked Lists
+Singly Linked List
+Doubly Linked List
+
+Unit 3
+Trees
+Binary Trees
+Binary Search Trees
