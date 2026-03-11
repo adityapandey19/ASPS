@@ -1,13 +1,13 @@
 import re
 
 
-UNIT_PATTERN = re.compile(r"(unit\s*\d+|module\s*\d+|chapter\s*\d+)", re.IGNORECASE)
+UNIT_PATTERN = re.compile(
+    r"(unit\s*\d+|unit\s*[ivx]+|module\s*\d+|chapter\s*\d+)",
+    re.IGNORECASE
+)
 
 
 def detect_units(text):
-    """
-    Detect syllabus units
-    """
 
     lines = text.split("\n")
 
@@ -16,13 +16,19 @@ def detect_units(text):
 
     for line in lines:
 
+        line = line.strip()
+
+        if not line:
+            continue
+
+        # Detect a new unit heading
         if UNIT_PATTERN.search(line):
 
             if current_unit:
                 units.append(current_unit)
 
             current_unit = {
-                "name": line.strip(),
+                "name": line,
                 "content": []
             }
 

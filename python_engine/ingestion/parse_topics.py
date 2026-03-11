@@ -1,7 +1,5 @@
+IGNORE_WORDS = ["reference", "book", "objective", "evaluation"]
 def extract_topics(units):
-    """
-    Extract topics inside each unit
-    """
 
     parsed_units = []
 
@@ -11,16 +9,18 @@ def extract_topics(units):
 
         for line in unit["content"]:
 
-            topic = {
-                "name": line.strip(),
-                "credits": 0,
-                "complexity": 1,
-                "exposure_level": 0,
-                "last_revised_days": 0,
-                "subtopics": []
-            }
+            if not any(word in line.lower() for word in IGNORE_WORDS):
 
-            topics.append(topic)
+                topic = {
+                    "name": line.strip(),
+                    "credits": 0,
+                    "complexity": 1,
+                    "exposure_level": 0,
+                    "last_revised_days": 0,
+                    "subtopics": []
+                }
+
+                topics.append(topic)
 
         parsed_units.append({
             "name": unit["name"],

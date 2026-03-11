@@ -12,7 +12,7 @@ def build_structure(course_name, units):
     for unit in units:
         structured_units.append({
             "name": unit["name"],
-            "weightage": 0,
+            "weightage": len(unit["topics"]),
             "topics": unit["topics"]
         })
 
@@ -22,24 +22,22 @@ def build_structure(course_name, units):
     }
 
 
-def run_pipeline():
+def run_pipeline(input_path, output_path):
 
-    file_path = "../../sample_syllabus.txt"
-
-    text = extract_text_from_txt(file_path)
+    text = extract_text_from_txt(input_path)
 
     detected_units = detect_units(text)
 
     parsed_units = extract_topics(detected_units)
 
+    if not parsed_units:
+        raise ValueError("No units detected in syllabus")
+
     syllabus = build_structure("Sample Course", parsed_units)
 
-    topic_count = sum(len(u["topics"]) for u in parsed_units)
-
-    print("Units detected:", len(parsed_units))
-    print("Topics detected:", topic_count)
-
-    output_path = "../data_layer/syllabus.json"
+    for unit in syllabus["units"]:
+        if not unit["topics"]:
+            raise ValueError(f"No topics detected in {unit['name']}")
 
     with open(output_path, "w") as f:
         json.dump(syllabus, f, indent=4)
@@ -51,4 +49,8 @@ def run_pipeline():
 
 
 if __name__ == "__main__":
-    run_pipeline()
+
+    input_path = "../../sample_syllabus.txt"
+    output_path = "../data_layer/syllabus.json"
+
+    run_pipeline(input_path, output_path)
