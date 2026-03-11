@@ -1,6 +1,6 @@
 # Frontend (Mock Prototype)
 
-Owners: Aryan Sidhart & Md. Khush
+Owners: Aryan Siddhart & Md. Khushtar
 
 ## Purpose
 Create mock UI to demonstrate ASPS workflow.
