@@ -1,0 +1,95 @@
+{
+    "course": "Sample Course",
+    "units": [
+        {
+            "name": "Unit 1",
+            "weightage": 0,
+            "topics": [
+                {
+                    "name": "Arrays",
+                    "credits": 0,
+                    "complexity": 1,
+                    "exposure_level": 0,
+                    "last_revised_days": 0,
+                    "subtopics": []
+                },
+                {
+                    "name": "Array operations",
+                    "credits": 0,
+                    "complexity": 1,
+                    "exposure_level": 0,
+                    "last_revised_days": 0,
+                    "subtopics": []
+                },
+                {
+                    "name": "2D arrays",
+                    "credits": 0,
+                    "complexity": 1,
+                    "exposure_level": 0,
+                    "last_revised_days": 0,
+                    "subtopics": []
+                }
+            ]
+        },
+        {
+            "name": "Unit 2",
+            "weightage": 0,
+            "topics": [
+                {
+                    "name": "Linked Lists",
+                    "credits": 0,
+                    "complexity": 1,
+                    "exposure_level": 0,
+                    "last_revised_days": 0,
+                    "subtopics": []
+                },
+                {
+                    "name": "Singly Linked List",
+                    "credits": 0,
+                    "complexity": 1,
+                    "exposure_level": 0,
+                    "last_revised_days": 0,
+                    "subtopics": []
+                },
+                {
+                    "name": "Doubly Linked List",
+                    "credits": 0,
+                    "complexity": 1,
+                    "exposure_level": 0,
+                    "last_revised_days": 0,
+                    "subtopics": []
+                }
+            ]
+        },
+        {
+            "name": "Unit 3",
+            "weightage": 0,
+            "topics": [
+                {
+                    "name": "Trees",
+                    "credits": 0,
+                    "complexity": 1,
+                    "exposure_level": 0,
+                    "last_revised_days": 0,
+                    "subtopics": []
+                },
+                {
+                    "name": "Binary Trees",
+                    "credits": 0,
+                    "complexity": 1,
+                    "exposure_level": 0,
+                    "last_revised_days": 0,
+                    "subtopics": []
+                },
+                {
+                    "name": "Binary Search Trees",
+                    "credits": 0,
+                    "complexity": 1,
+                    "exposure_level": 0,
+                    "last_revised_days": 0,
+                    "subtopics": []
+                }
+            ]
+        }
+    ]
+}
